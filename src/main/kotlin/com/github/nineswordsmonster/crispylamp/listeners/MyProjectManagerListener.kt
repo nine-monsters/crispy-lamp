@@ -8,6 +8,7 @@ import com.github.nineswordsmonster.crispylamp.services.MyProjectService
 internal class MyProjectManagerListener : ProjectManagerListener {
 
     override fun projectOpened(project: Project) {
+
         project.service<MyProjectService>()
     }
 }

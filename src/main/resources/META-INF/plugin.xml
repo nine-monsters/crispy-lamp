@@ -1,18 +1,27 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
     <id>com.github.nineswordsmonster.crispylamp</id>
-    <name>crispy-lamp</name>
-    <vendor>nineswordsmonster</vendor>
+    <name>Crispy Lamp</name>
+    <vendor email="wangjia_1919@163.com">Nine Swords Monster</vendor>
 
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.nineswordsmonster.crispylamp.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.nineswordsmonster.crispylamp.services.MyProjectService"/>
+        <toolWindow factoryClass="com.github.nineswordsmonster.crispylamp.tool.DemoToolWindowFactory" id="demo" anchor="left"/>
     </extensions>
 
     <applicationListeners>
         <listener class="com.github.nineswordsmonster.crispylamp.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="com.jetbrains.compose.ComposeDemoAction" class="com.github.nineswordsmonster.crispylamp.actions.ComposeDemoAction"
+                text="Show Compose Demo...">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+    </actions>
 </idea-plugin>

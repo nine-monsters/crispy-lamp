@@ -9,7 +9,8 @@
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.nineswordsmonster.crispylamp.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.nineswordsmonster.crispylamp.services.MyProjectService"/>
-        <toolWindow factoryClass="com.github.nineswordsmonster.crispylamp.tool.DemoToolWindowFactory" id="demo" anchor="left"/>
+        <toolWindow id="demo" anchor="left"
+                    factoryClass="com.github.nineswordsmonster.crispylamp.tool.DemoToolWindowFactory" />
     </extensions>
 
     <applicationListeners>
@@ -19,7 +20,8 @@
 
     <actions>
         <!-- Add your actions here -->
-        <action id="com.jetbrains.compose.ComposeDemoAction" class="com.github.nineswordsmonster.crispylamp.actions.ComposeDemoAction"
+        <action id="com.jetbrains.compose.ComposeDemoAction"
+                class="com.github.nineswordsmonster.crispylamp.actions.ComposeDemoAction"
                 text="Show Compose Demo...">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>

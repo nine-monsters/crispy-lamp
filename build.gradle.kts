@@ -14,8 +14,8 @@ plugins {
     id("org.jetbrains.changelog") version "1.3.1"
     // Gradle Qodana Plugin
     id("org.jetbrains.qodana") version "0.1.13"
-
-    id("org.jetbrains.compose") version "1.1.1"
+    // compose
+    id("org.jetbrains.compose") version "1.2.0-alpha01-dev620"
 }
 
 group = properties("pluginGroup")
@@ -25,12 +25,14 @@ version = properties("pluginVersion")
 repositories {
     mavenCentral()
     google()
-    maven { url = uri("https://maven.pkg.jetbrains.space/public/p/compose/dev") }
 }
 
 dependencies {
     implementation(compose.desktop.currentOs)
-    testImplementation("junit", "junit", "4.12")
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
 }
 
 // Configure Gradle IntelliJ Plugin - read more: https://github.com/JetBrains/gradle-intellij-plugin
@@ -71,6 +73,10 @@ tasks {
 
     wrapper {
         gradleVersion = properties("gradleVersion")
+    }
+
+    buildSearchableOptions {
+        enabled = true
     }
 
     patchPluginXml {
@@ -121,5 +127,13 @@ tasks {
         // Specify pre-release label to publish the plugin in a custom Release Channel automatically. Read more:
         // https://plugins.jetbrains.com/docs/intellij/deployment.html#specifying-a-release-channel
         channels.set(listOf(properties("pluginVersion").split('-').getOrElse(1) { "default" }.split('.').first()))
+    }
+
+    compileKotlin {
+        kotlinOptions.jvmTarget = "11"
+    }
+
+    compileTestKotlin {
+        kotlinOptions.jvmTarget = "11"
     }
 }

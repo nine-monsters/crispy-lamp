@@ -1,10 +1,10 @@
 package com.github.nineswordsmonster.crispylamp.services
 
-import com.github.nineswordsmonster.crispylamp.MyBundle
+import com.github.nineswordsmonster.crispylamp.MessageBundle
 
 class MyApplicationService {
 
     init {
-        println(MyBundle.message("applicationService"))
+        println(MessageBundle.message("applicationService"))
     }
 }

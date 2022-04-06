@@ -7,10 +7,12 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.nineswordsmonster.crispylamp.services.MyApplicationService"/>
+        <applicationService
+                serviceImplementation="com.github.nineswordsmonster.crispylamp.services.MyApplicationService"/>
         <projectService serviceImplementation="com.github.nineswordsmonster.crispylamp.services.MyProjectService"/>
         <toolWindow id="demo" anchor="left"
-                    factoryClass="com.github.nineswordsmonster.crispylamp.tool.DemoToolWindowFactory" />
+                    factoryClass="com.github.nineswordsmonster.crispylamp.tool.DemoToolWindowFactory"/>
+        <themeProvider id="nine.theme" path="/nine.theme.json"/>
     </extensions>
 
     <applicationListeners>
@@ -19,11 +21,23 @@
     </applicationListeners>
 
     <actions>
-        <!-- Add your actions here -->
-        <action id="com.jetbrains.compose.ComposeDemoAction"
-                class="com.github.nineswordsmonster.crispylamp.actions.ComposeDemoAction"
-                text="Show Compose Demo...">
-            <add-to-group group-id="ToolsMenu" anchor="last"/>
-        </action>
+        <group id="nine.actions" popup="true" text="Nine Action Group"
+               class="com.github.nineswordsmonster.crispylamp.actions.NineActionGroup">
+            <add-to-group group-id="HelpMenu" anchor="last"/>
+
+            <action id="nine.ChickenSoupAction" text="Get Soup"
+                    class="com.github.nineswordsmonster.crispylamp.actions.ChickenSoupAction">
+                <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl meta alt I"/>
+            </action>
+
+            <separator/>
+
+            <action id="nine.ComposeDemoAction" text="Show Compose Demo..."
+                    class="com.github.nineswordsmonster.crispylamp.actions.ComposeDemoAction">
+            </action>
+        </group>
     </actions>
+
+    <application-components>
+    </application-components>
 </idea-plugin>

@@ -1,7 +1,7 @@
-<!-- Keep a Changelog guide -> https://keepachangelog.com -->
-
-# crispy-lamp Changelog
+# Changelog
 
 ## [Unreleased]
-### Added
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+
+## [0.0.1-alpha.2]
+- Example item
+

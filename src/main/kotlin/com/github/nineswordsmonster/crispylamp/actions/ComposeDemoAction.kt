@@ -33,7 +33,7 @@ class ComposeDemoAction : DumbAwareAction() {
                                 Column(
                                     modifier = Modifier.fillMaxHeight().weight(1f)
                                 ) {
-                                    Buttons()
+                                    Buttons(project = null)
                                     Loaders()
                                     TextInputs()
                                     Toggles()

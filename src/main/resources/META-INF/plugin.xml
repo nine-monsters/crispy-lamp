@@ -21,9 +21,9 @@
     </applicationListeners>
 
     <actions>
-        <group id="nine.actions" popup="true" text="Nine Action Group"
+        <group id="nine.actions" popup="true" text="Crispy Lamp" icon="com.github.nineswordsmonster.crispylamp.NineIcons.ActionGroup"
                class="com.github.nineswordsmonster.crispylamp.actions.NineActionGroup">
-            <add-to-group group-id="HelpMenu" anchor="last"/>
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
 
             <action id="nine.ChickenSoupAction" text="Get Soup"
                     class="com.github.nineswordsmonster.crispylamp.actions.ChickenSoupAction">

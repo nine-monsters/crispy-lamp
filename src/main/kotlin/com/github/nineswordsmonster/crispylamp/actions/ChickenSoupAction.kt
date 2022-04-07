@@ -1,6 +1,6 @@
 package com.github.nineswordsmonster.crispylamp.actions
 
-import com.github.nineswordsmonster.crispylamp.services.OilPriceService
+import com.github.nineswordsmonster.crispylamp.dialogs.OilPriceDialogWrapper
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformDataKeys
@@ -14,6 +14,6 @@ class ChickenSoupAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
         val project: Project? = e.getData(PlatformDataKeys.PROJECT)
-        OilPriceService().getOil()
+        OilPriceDialogWrapper(true).showAndGet()
     }
 }

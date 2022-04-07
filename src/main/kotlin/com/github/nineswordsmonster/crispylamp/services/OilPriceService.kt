@@ -50,13 +50,14 @@ class OilPriceService {
     @OptIn(ExperimentalCoroutinesApi::class)
     private fun getOilPrice() = CoroutineScope(Dispatchers.IO).async { ApiClient.chickenSoupService.getPrice(32) }
 
-    fun getOil() = run {
+    fun getOil() : OilPrice  {
         val soup = OilPriceService().getOilPrice()
-        runBlocking {
+        return runBlocking {
             val htmlStr = soup.await().string()
             LOG.debug("The answer is $htmlStr")
             val res = getOilPrices(htmlStr)
             LOG.info(res.toString())
+            res
         }
     }
 }

@@ -4,8 +4,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.awt.ComposePanel
-import com.github.nineswordsmonster.crispylamp.theme.WidgetTheme
-import com.github.nineswordsmonster.crispylamp.widgets.*
+import com.github.nineswordsmonster.crispylamp.ui.theme.WidgetTheme
+import com.github.nineswordsmonster.crispylamp.ui.widgets.*
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.project.DumbAwareAction
 import com.intellij.openapi.project.Project

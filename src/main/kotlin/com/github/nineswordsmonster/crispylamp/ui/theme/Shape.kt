@@ -1,4 +1,4 @@
-package com.github.nineswordsmonster.crispylamp.theme
+package com.github.nineswordsmonster.crispylamp.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

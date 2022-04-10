@@ -1,4 +1,4 @@
-package com.github.nineswordsmonster.crispylamp
+package com.github.nineswordsmonster.crispylamp.icons
 
 import com.intellij.openapi.util.IconLoader
 

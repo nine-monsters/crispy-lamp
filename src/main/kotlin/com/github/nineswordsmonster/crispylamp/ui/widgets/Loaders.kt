@@ -1,4 +1,4 @@
-package com.github.nineswordsmonster.crispylamp.widgets
+package com.github.nineswordsmonster.crispylamp.ui.widgets
 
 
 import androidx.compose.foundation.layout.Box

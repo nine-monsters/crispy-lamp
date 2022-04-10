@@ -9,3 +9,5 @@ data class OilPrice(
 }
 
 data class Price(val type: String, val price: String)
+
+data class Location(val key: Int, val name: String)

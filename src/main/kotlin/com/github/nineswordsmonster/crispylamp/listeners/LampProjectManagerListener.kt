@@ -3,12 +3,12 @@ package com.github.nineswordsmonster.crispylamp.listeners
 import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.project.ProjectManagerListener
-import com.github.nineswordsmonster.crispylamp.services.MyProjectService
+import com.github.nineswordsmonster.crispylamp.services.LampProjectService
 
-internal class MyProjectManagerListener : ProjectManagerListener {
+internal class LampProjectManagerListener : ProjectManagerListener {
 
     override fun projectOpened(project: Project) {
 
-        project.service<MyProjectService>()
+        project.service<LampProjectService>()
     }
 }

@@ -1,14 +1,11 @@
 package com.github.nineswordsmonster.crispylamp.services
 
 import com.github.nineswordsmonster.crispylamp.apis.ApiClient
+import com.github.nineswordsmonster.crispylamp.entity.Location
 import com.github.nineswordsmonster.crispylamp.entity.OilPrice
 import com.github.nineswordsmonster.crispylamp.entity.Price
 import com.intellij.openapi.diagnostic.logger
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.async
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import org.jsoup.Jsoup
 
 private val LOG = logger<OilPriceService>()
@@ -47,15 +44,41 @@ class OilPriceService {
         return oilPrice
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
-    private fun getOilPrice() = CoroutineScope(Dispatchers.IO).async { ApiClient.chickenSoupService.getPrice(32) }
+    private fun getLocations(htmlStr: String): List<Location> {
+        val regex = Regex("queryOilById\\((.*)\\)")
+        val html = Jsoup.parse(htmlStr)
+        val box = html.getElementsByClass("city_list")
 
-    fun getOil() : OilPrice  {
+        val los = box.select("ul li")
+        val locations = mutableListOf<Location>().apply {
+            los.forEach {
+                val id = regex.matchEntire(it.attr("onclick"))?.groupValues?.get(1)
+                id?.let { it1 -> add(Location(it1.toInt(), it.select("span").text())) }
+            }
+        }
+        return locations
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    private fun getOilPrice() = CoroutineScope(Dispatchers.Default).async { ApiClient.oilSoupService.getPrice(32) }
+
+    fun getOil(): OilPrice {
         val soup = OilPriceService().getOilPrice()
         return runBlocking {
             val htmlStr = soup.await().string()
             LOG.debug("The answer is $htmlStr")
             val res = getOilPrices(htmlStr)
+            LOG.info(res.toString())
+            res
+        }
+    }
+
+    fun getLocations(): List<Location> {
+        val soup = OilPriceService().getOilPrice()
+        return runBlocking {
+            val htmlStr = soup.await().string()
+            LOG.debug("The answer is $htmlStr")
+            val res = getLocations(htmlStr)
             LOG.info(res.toString())
             res
         }

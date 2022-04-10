@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.awt.ComposePanel
 import com.github.nineswordsmonster.crispylamp.entity.OilPrice
 import com.github.nineswordsmonster.crispylamp.services.OilPriceService
-import com.github.nineswordsmonster.crispylamp.theme.WidgetTheme
+import com.github.nineswordsmonster.crispylamp.ui.theme.WidgetTheme
 import com.intellij.openapi.ui.DialogWrapper
 import javax.swing.JComponent
 

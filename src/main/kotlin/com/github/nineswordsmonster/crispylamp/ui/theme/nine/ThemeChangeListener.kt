@@ -1,4 +1,4 @@
-package com.github.nineswordsmonster.crispylamp.theme.nine
+package com.github.nineswordsmonster.crispylamp.ui.theme.nine
 
 import com.intellij.ide.ui.LafManager
 import com.intellij.ide.ui.LafManagerListener

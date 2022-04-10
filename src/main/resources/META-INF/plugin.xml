@@ -2,27 +2,64 @@
 <idea-plugin>
     <id>com.github.nineswordsmonster.crispylamp</id>
     <name>Crispy Lamp</name>
-    <vendor email="wangjia_1919@163.com">Nine Swords Monster</vendor>
+    <vendor email="wangjia_1919@163.com" url="https://github.com/NineSwordsMonster">Nine Swords Monster</vendor>
 
     <depends>com.intellij.modules.platform</depends>
+    <depends>Git4Idea</depends>
+    <depends>com.intellij.modules.vcs</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+        <errorHandler implementation="com.github.nineswordsmonster.crispylamp.error.DefaultErrorHandler" />
+
+        <applicationConfigurable
+                parentId="other"
+                id="crispylamp.lamp.settings"
+                key="lamp.setting" bundle="messages.settingBundle"
+                instance="com.github.nineswordsmonster.crispylamp.setting.LampApplicationSetting">
+            <configurable
+                    id="crispylamp.gadget.setting"
+                    key="gadget.setting" bundle="messages.settingBundle"
+                    instance="com.github.nineswordsmonster.crispylamp.setting.LampGadgetSetting"/>
+
+<!--            <configurable-->
+<!--                    id="crispylamp.tool.setting"-->
+<!--                    key="lamp.tool.setting" bundle="messages.settingBundle"-->
+<!--                    provider="com.github.nineswordsmonster.crispylamp.setting.LampToolSetting"/>-->
+        </applicationConfigurable>
+
         <applicationService
-                serviceImplementation="com.github.nineswordsmonster.crispylamp.services.MyApplicationService"/>
-        <projectService serviceImplementation="com.github.nineswordsmonster.crispylamp.services.MyProjectService"/>
+                serviceImplementation="com.github.nineswordsmonster.crispylamp.services.LampApplicationService"/>
+        <applicationService
+                serviceImplementation="com.github.nineswordsmonster.crispylamp.setting.LampGadgetSettingsState"/>
+
+        <projectService
+                serviceImplementation="com.github.nineswordsmonster.crispylamp.services.LampProjectService"/>
+
         <toolWindow id="demo" anchor="left"
                     factoryClass="com.github.nineswordsmonster.crispylamp.tool.DemoToolWindowFactory"/>
+
         <themeProvider id="nine.theme" path="/nine.theme.json"/>
+
+        <prePushHandler implementation="com.github.nineswordsmonster.crispylamp.vcs.CheckoutChecker"/>
+        <vcs.commitMessageProvider implementation="com.github.nineswordsmonster.crispylamp.vcs.LampCommitMessageProvider"/>
     </extensions>
 
+    <extensions defaultExtensionNs="Git4Idea">
+    </extensions>
+
+    <extensionPoints>
+
+    </extensionPoints>
+
+
     <applicationListeners>
-        <listener class="com.github.nineswordsmonster.crispylamp.listeners.MyProjectManagerListener"
+        <listener class="com.github.nineswordsmonster.crispylamp.listeners.LampProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
 
     <actions>
-        <group id="nine.actions" popup="true" text="Crispy Lamp" icon="com.github.nineswordsmonster.crispylamp.NineIcons.ActionGroup"
-               class="com.github.nineswordsmonster.crispylamp.actions.NineActionGroup">
+        <group id="nine.actions" popup="true" text="Crispy Lamp" icon="com.github.nineswordsmonster.crispylamp.icons.NineIcons.ActionGroup"
+               class="com.github.nineswordsmonster.crispylamp.actions.LampActionGroup">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
 
             <action id="nine.ChickenSoupAction" text="Get Soup"

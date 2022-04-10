@@ -25,7 +25,7 @@ object ApiClient {
             .build()
     }
 
-    val chickenSoupService: ChickenSoupService by lazy {
-        retrofit.create(ChickenSoupService::class.java)
+    val oilSoupService: OilSoupService by lazy {
+        retrofit.create(OilSoupService::class.java)
     }
 }

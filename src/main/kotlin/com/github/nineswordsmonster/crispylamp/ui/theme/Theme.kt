@@ -6,7 +6,7 @@ import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.github.nineswordsmonster.crispylamp.ui.theme.nine.SwingColor
+import com.github.nineswordsmonster.crispylamp.ui.theme.color.SwingColor
 
 private val DarkGreenColorPalette = darkColors(
     primary = green200,

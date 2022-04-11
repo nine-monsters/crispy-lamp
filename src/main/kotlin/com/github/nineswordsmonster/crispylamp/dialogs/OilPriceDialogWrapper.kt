@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.github.nineswordsmonster.crispylamp.MessageBundle
 import com.github.nineswordsmonster.crispylamp.entity.OilPrice
 import com.github.nineswordsmonster.crispylamp.services.OilPriceService
+import com.github.nineswordsmonster.crispylamp.setting.LampGadgetSettingsState
 import com.github.nineswordsmonster.crispylamp.ui.theme.WidgetTheme
 import com.intellij.openapi.ui.DialogWrapper
 import javax.swing.JComponent
@@ -35,7 +36,7 @@ class OilPriceDialogWrapper(canBeParent: Boolean) : DialogWrapper(canBeParent) {
 
     @Override
     override fun createCenterPanel(): JComponent {
-        val price = OilPriceService.instance.getOil()
+        val price = OilPriceService.instance.getOil(LampGadgetSettingsState.instance.selected)
         return createCenterPanel(price)
     }
 }

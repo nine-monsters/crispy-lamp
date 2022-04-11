@@ -68,10 +68,6 @@
             </action>
 
             <separator/>
-
-            <action id="nine.ComposeDemoAction" text="Show Compose Demo..."
-                    class="com.github.nineswordsmonster.crispylamp.actions.ComposeDemoAction">
-            </action>
         </group>
     </actions>
 

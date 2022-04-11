@@ -1,4 +1,4 @@
-package com.github.nineswordsmonster.crispylamp.ui.theme.nine
+package com.github.nineswordsmonster.crispylamp.ui.theme.color
 
 
 import androidx.compose.runtime.*

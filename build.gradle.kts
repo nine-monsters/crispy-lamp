@@ -9,13 +9,13 @@ plugins {
     // Kotlin support
     id("org.jetbrains.kotlin.jvm") version "1.6.10"
     // Gradle IntelliJ Plugin
-    id("org.jetbrains.intellij") version "1.4.0"
+    id("org.jetbrains.intellij") version "1.5.2"
     // Gradle Changelog Plugin
     id("org.jetbrains.changelog") version "1.3.1"
     // Gradle Qodana Plugin
     id("org.jetbrains.qodana") version "0.1.13"
     // compose
-    id("org.jetbrains.compose") version "1.2.0-alpha01-dev620"
+    id("org.jetbrains.compose") version "1.1.1"
 }
 
 group = properties("pluginGroup")
@@ -32,6 +32,7 @@ dependencies {
     implementation("com.squareup.retrofit2", "retrofit", "2.9.0")
     implementation("com.squareup.retrofit2", "converter-gson", "2.9.0")
     implementation("org.jsoup","jsoup", "1.14.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.6.1")
 }
 
 java {

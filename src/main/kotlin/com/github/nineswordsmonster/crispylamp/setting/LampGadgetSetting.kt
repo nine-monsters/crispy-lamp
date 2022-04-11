@@ -1,20 +1,23 @@
 package com.github.nineswordsmonster.crispylamp.setting
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.MaterialTheme
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.GridCells
+import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.RadioButton
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.awt.ComposePanel
 import androidx.compose.ui.unit.dp
 import com.github.nineswordsmonster.crispylamp.SettingBundle
 import com.github.nineswordsmonster.crispylamp.entity.Location
 import com.github.nineswordsmonster.crispylamp.services.OilPriceService
+import com.github.nineswordsmonster.crispylamp.ui.theme.WidgetTheme
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
@@ -25,6 +28,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil
 import org.jetbrains.annotations.NotNull
 import org.jetbrains.annotations.Nullable
 import javax.swing.JComponent
+import javax.swing.JToggleButton
 
 val LOG = logger<LampGadgetSetting>()
 
@@ -60,6 +64,10 @@ class LampGadgetSetting : Configurable {
     override fun getDisplayName(): String {
         return SettingBundle.getMessage("gadget.setting")
     }
+
+    override fun isModified(toggleButton: JToggleButton, value: Boolean): Boolean {
+        return toggleButton.isSelected != value
+    }
 }
 
 @State(
@@ -86,39 +94,54 @@ class LampGadgetSettingsState : PersistentStateComponent<LampGadgetSettingsState
 
 class LampGadgetSettingsComponent(location: Location, locations: List<Location>) {
     var selected: Int = location.key
-
     val component: JComponent = ComposePanel().apply {
         setContent {
             buildComponent(locations) {
                 LOG.info("选择了 ${it}")
                 selected = it
+                LampGadgetSettingsState.instance.selected = it
             }
         }
     }
 
+    @OptIn(ExperimentalFoundationApi::class)
     @Composable
     private fun buildComponent(locations: List<Location>, onChange: (Int) -> Unit) {
         var selected by remember { mutableStateOf(32) }
-        MaterialTheme {
-            Row {
-                locations.forEach {
-                    Column(modifier = Modifier.padding(12.dp)) {
-                        RadioButton(selected = selected == it.key,
-                            modifier = Modifier.size(6.dp),
-                            onClick = {
-                                selected = it.key
-                                onChange(selected)
+        WidgetTheme(darkTheme = false) {
+            Surface(modifier = Modifier.fillMaxSize()) {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment=Alignment.BottomEnd) {
+                    val listState = rememberLazyListState()
+                    LazyVerticalGrid(
+                        cells = GridCells.Fixed(3),
+                        modifier = Modifier.fillMaxSize(),
+                        state = listState,
+                        contentPadding = PaddingValues(4.dp)) {
+
+                        items(locations.size){ index ->
+                            val location = locations[index]
+                            Row {
+                                RadioButton(selected = selected == location.key,
+                                    modifier = Modifier.size(6.dp),
+                                    onClick = {
+                                        selected = location.key
+                                        onChange(selected)
+                                    }
+                                )
+                                Spacer(modifier = Modifier.size(6.dp))
+                                Text(
+                                    text = location.name,
+                                    modifier = Modifier
+                                        .align(Alignment.CenterVertically)
+                                        .clickable(
+                                            onClick = {
+                                                selected = location.key
+                                                onChange(selected)
+                                            }
+                                        )
+                                )
                             }
-                        )
-                        Text(
-                            text = it.name,
-                            modifier = Modifier.clickable(
-                                onClick = {
-                                    selected = it.key
-                                    onChange(selected)
-                                }
-                            ).padding(start = 4.dp)
-                        )
+                        }
                     }
                 }
             }

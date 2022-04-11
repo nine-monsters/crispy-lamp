@@ -61,10 +61,10 @@ class OilPriceService private constructor() {
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    private fun getOilPrice() = CoroutineScope(Dispatchers.Default).async { ApiClient.oilSoupService.getPrice(32) }
+    private fun getOilPrice(location: Int = 32) = CoroutineScope(Dispatchers.Default).async { ApiClient.oilSoupService.getPrice(location) }
 
-    fun getOil(): OilPrice {
-        val soup = instance.getOilPrice()
+    fun getOil(location: Int): OilPrice {
+        val soup = instance.getOilPrice(location)
         return runBlocking {
             val htmlStr = soup.await().string()
             LOG.debug("The answer is $htmlStr")

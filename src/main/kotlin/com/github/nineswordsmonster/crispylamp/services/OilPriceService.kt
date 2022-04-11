@@ -1,6 +1,7 @@
 package com.github.nineswordsmonster.crispylamp.services
 
 import com.github.nineswordsmonster.crispylamp.apis.ApiClient
+import com.github.nineswordsmonster.crispylamp.apis.OilSoupService
 import com.github.nineswordsmonster.crispylamp.entity.Location
 import com.github.nineswordsmonster.crispylamp.entity.OilPrice
 import com.github.nineswordsmonster.crispylamp.entity.Price
@@ -10,7 +11,7 @@ import org.jsoup.Jsoup
 
 private val LOG = logger<OilPriceService>()
 
-class OilPriceService {
+class OilPriceService private constructor() {
     private fun getOilPrices(htmlStr: String): OilPrice {
         val html = Jsoup.parse(htmlStr)
         val box = html.getElementsByClass("pri_box")
@@ -63,7 +64,7 @@ class OilPriceService {
     private fun getOilPrice() = CoroutineScope(Dispatchers.Default).async { ApiClient.oilSoupService.getPrice(32) }
 
     fun getOil(): OilPrice {
-        val soup = OilPriceService().getOilPrice()
+        val soup = instance.getOilPrice()
         return runBlocking {
             val htmlStr = soup.await().string()
             LOG.debug("The answer is $htmlStr")
@@ -74,13 +75,19 @@ class OilPriceService {
     }
 
     fun getLocations(): List<Location> {
-        val soup = OilPriceService().getOilPrice()
+        val soup = instance.getOilPrice()
         return runBlocking {
             val htmlStr = soup.await().string()
             LOG.debug("The answer is $htmlStr")
             val res = getLocations(htmlStr)
             LOG.info(res.toString())
             res
+        }
+    }
+
+    companion object {
+        val instance: OilPriceService by lazy(mode = LazyThreadSafetyMode.SYNCHRONIZED) {
+            OilPriceService()
         }
     }
 }

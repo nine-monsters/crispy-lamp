@@ -32,7 +32,7 @@ class LampGadgetSetting : Configurable {
     private var locations: List<Location> = emptyList()
 
     init {
-        locations = OilPriceService().getLocations()
+        locations = OilPriceService.instance.getLocations()
     }
 
     private val lampGadgetSettingsComponent: LampGadgetSettingsComponent =

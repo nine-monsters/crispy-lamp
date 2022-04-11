@@ -13,7 +13,6 @@ private val LOG = logger<ChickenSoupAction>()
 class ChickenSoupAction : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
-        val project: Project? = e.getData(PlatformDataKeys.PROJECT)
-        OilPriceDialogWrapper(true).showAndGet()
+        OilPriceDialogWrapper(true).show()
     }
 }

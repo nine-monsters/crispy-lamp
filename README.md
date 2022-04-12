@@ -5,7 +5,9 @@
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
 
 <!-- Plugin description -->
-A Toolset
+[WIP] 小工具合集
+
+- 今日油价
 <!-- Plugin description end -->
 
 ## Installation

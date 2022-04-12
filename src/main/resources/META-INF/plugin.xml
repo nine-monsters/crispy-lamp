@@ -35,8 +35,8 @@
         <projectService
                 serviceImplementation="com.github.nineswordsmonster.crispylamp.services.LampProjectService"/>
 
-        <toolWindow id="demo" anchor="left"
-                    factoryClass="com.github.nineswordsmonster.crispylamp.tool.DemoToolWindowFactory"/>
+<!--        <toolWindow id="demo" anchor="left"-->
+<!--                    factoryClass="com.github.nineswordsmonster.crispylamp.tool.DemoToolWindowFactory"/>-->
 
         <themeProvider id="nine.theme" path="/nine.theme.json"/>
 
@@ -62,7 +62,7 @@
                class="com.github.nineswordsmonster.crispylamp.actions.LampActionGroup">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
 
-            <action id="nine.ChickenSoupAction" text="Get Soup"
+            <action id="nine.ChickenSoupAction" text="今日油价"
                     class="com.github.nineswordsmonster.crispylamp.actions.ChickenSoupAction">
                 <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl meta alt I"/>
             </action>

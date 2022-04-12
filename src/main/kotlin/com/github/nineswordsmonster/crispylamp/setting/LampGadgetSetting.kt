@@ -18,6 +18,7 @@ import com.github.nineswordsmonster.crispylamp.SettingBundle
 import com.github.nineswordsmonster.crispylamp.entity.Location
 import com.github.nineswordsmonster.crispylamp.services.OilPriceService
 import com.github.nineswordsmonster.crispylamp.ui.theme.WidgetTheme
+import com.github.nineswordsmonster.crispylamp.ui.theme.typography
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.components.PersistentStateComponent
 import com.intellij.openapi.components.State
@@ -39,8 +40,7 @@ class LampGadgetSetting : Configurable {
         locations = OilPriceService.instance.getLocations()
     }
 
-    private val lampGadgetSettingsComponent: LampGadgetSettingsComponent =
-        LampGadgetSettingsComponent(locations[0], locations)
+    private val lampGadgetSettingsComponent: LampGadgetSettingsComponent = LampGadgetSettingsComponent(locations)
 
     override fun createComponent(): JComponent {
         return lampGadgetSettingsComponent.component
@@ -92,8 +92,8 @@ class LampGadgetSettingsState : PersistentStateComponent<LampGadgetSettingsState
     }
 }
 
-class LampGadgetSettingsComponent(location: Location, locations: List<Location>) {
-    var selected: Int = location.key
+class LampGadgetSettingsComponent(locations: List<Location>) {
+    var selected: Int = LampGadgetSettingsState.instance.selected
     val component: JComponent = ComposePanel().apply {
         setContent {
             buildComponent(locations) {
@@ -107,43 +107,50 @@ class LampGadgetSettingsComponent(location: Location, locations: List<Location>)
     @OptIn(ExperimentalFoundationApi::class)
     @Composable
     private fun buildComponent(locations: List<Location>, onChange: (Int) -> Unit) {
-        var selected by remember { mutableStateOf(32) }
+        var selected by remember { mutableStateOf(selected) }
         WidgetTheme(darkTheme = false) {
             Surface(modifier = Modifier.fillMaxSize()) {
-                Box(modifier = Modifier.fillMaxSize(), contentAlignment=Alignment.BottomEnd) {
-                    val listState = rememberLazyListState()
-                    LazyVerticalGrid(
-                        cells = GridCells.Fixed(3),
-                        modifier = Modifier.fillMaxSize(),
-                        state = listState,
-                        contentPadding = PaddingValues(4.dp)) {
-
-                        items(locations.size){ index ->
-                            val location = locations[index]
-                            Row {
-                                RadioButton(selected = selected == location.key,
-                                    modifier = Modifier.size(6.dp),
-                                    onClick = {
-                                        selected = location.key
-                                        onChange(selected)
-                                    }
-                                )
-                                Spacer(modifier = Modifier.size(6.dp))
-                                Text(
-                                    text = location.name,
-                                    modifier = Modifier
-                                        .align(Alignment.CenterVertically)
-                                        .clickable(
-                                            onClick = {
-                                                selected = location.key
-                                                onChange(selected)
-                                            }
-                                        )
-                                )
+                Column {
+                    Text(
+                        text = SettingBundle.message("gadget.oil.setting.title"),
+                        style = typography.h6,
+                    )
+                    Row(modifier = Modifier.fillMaxWidth()) {
+                        val listState = rememberLazyListState()
+                        LazyVerticalGrid(
+                            cells = GridCells.Adaptive(100.dp),
+                            modifier = Modifier.fillMaxSize(),
+                            state = listState,
+                            contentPadding = PaddingValues(4.dp)
+                        ) {
+                            items(locations.size) { index ->
+                                val location = locations[index]
+                                Row(modifier = Modifier.padding(6.dp)) {
+                                    RadioButton(selected = selected == location.key,
+//                                    modifier = Modifier.size(6.dp),
+                                        onClick = {
+                                            selected = location.key
+                                            onChange(selected)
+                                        }
+                                    )
+                                    Text(
+                                        text = location.name,
+                                        style = typography.body2,
+                                        modifier = Modifier
+                                            .align(Alignment.CenterVertically)
+                                            .clickable(
+                                                onClick = {
+                                                    selected = location.key
+                                                    onChange(selected)
+                                                }
+                                            )
+                                    )
+                                }
                             }
                         }
                     }
                 }
+
             }
         }
     }

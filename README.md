@@ -1,8 +1,8 @@
 # crispy-lamp
 
 ![Build](https://github.com/NineSwordsMonster/crispy-lamp/workflows/Build/badge.svg)
-[![Version](https://img.shields.io/jetbrains/plugin/v/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
-[![Downloads](https://img.shields.io/jetbrains/plugin/d/PLUGIN_ID.svg)](https://plugins.jetbrains.com/plugin/PLUGIN_ID)
+[![Version](https://img.shields.io/jetbrains/plugin/v/com.github.nineswordsmonster.crispylamp.svg)](https://plugins.jetbrains.com/plugin/com.github.nineswordsmonster.crispylamp)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/com.github.nineswordsmonster.crispylamp.svg)](https://plugins.jetbrains.com/plugin/https://img.shields.io/jetbrains/plugin/v/com.github.nineswordsmonster.crispylamp)
 
 <!-- Plugin description -->
 [WIP] 小工具合集

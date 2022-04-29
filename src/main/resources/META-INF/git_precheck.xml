@@ -1,0 +1,6 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+        <prePushHandler id="lamp.git.check.prepush" order="first"
+                        implementation="com.github.nineswordsmonster.crispylamp.vcs.CheckoutChecker"/>
+    </extensions>
+</idea-plugin>

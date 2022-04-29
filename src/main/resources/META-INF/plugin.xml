@@ -5,8 +5,8 @@
     <vendor email="wangjia_1919@163.com" url="https://github.com/NineSwordsMonster">Nine Swords Monster</vendor>
 
     <depends>com.intellij.modules.platform</depends>
-    <depends>Git4Idea</depends>
-    <depends>com.intellij.modules.vcs</depends>
+    <depends optional="true" config-file="database.xml">com.intellij.database</depends>
+    <depends optional="true" config-file="git_precheck.xml">Git4Idea</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <errorHandler implementation="com.github.nineswordsmonster.crispylamp.error.DefaultErrorHandler" />
@@ -44,9 +44,6 @@
         <vcs.commitMessageProvider implementation="com.github.nineswordsmonster.crispylamp.vcs.LampCommitMessageProvider"/>
     </extensions>
 
-    <extensions defaultExtensionNs="Git4Idea">
-    </extensions>
-
     <extensionPoints>
 
     </extensionPoints>
@@ -70,7 +67,4 @@
             <separator/>
         </group>
     </actions>
-
-    <application-components>
-    </application-components>
 </idea-plugin>

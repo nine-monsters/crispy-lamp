@@ -1,0 +1,13 @@
+<idea-plugin>
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
+
+    <actions>
+        <action id="lamp.model.gen.action"
+                class="com.github.nineswordsmonster.crispylamp.actions.ModelGeneratorAction"
+                text="Model-Generator"
+                description="Lamp generator model plugin">
+            <add-to-group group-id="DatabaseViewPopupMenu" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>

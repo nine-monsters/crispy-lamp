@@ -1,0 +1,1 @@
+package com.github.nineswordsmonster.crispylamp.model;
